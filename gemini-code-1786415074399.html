@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siam-Jiangnan Exclusive Tour | ทัวร์จีนส่วนตัวพรีเมียม</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #C8102E;
+            --primary-dark: #900B21;
+            --gold: #D4AF37;
+            --gold-light: #F9E8A2;
+            --dark: #121212;
+            --light-bg: #FAF9F6;
+            --card-bg: #FFFFFF;
+            --text-main: #2B2B2B;
+            --text-muted: #666666;
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+        body { font-family: 'Kanit', sans-serif; background-color: var(--light-bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+
+        /* Navbar */
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 15px 24px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-icon { width: 42px; height: 42px; background: linear-gradient(135deg, var(--primary), var(--gold)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; }
+        .logo-text { font-weight: 700; font-size: 1.3rem; color: var(--dark); }
+        .logo-text span { color: var(--primary); }
+        .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 500; }
+        .btn-contact-nav { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white !important; padding: 10px 22px; border-radius: 30px; }
+
+        /* Hero */
+        .hero { position: relative; min-height: 85vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(rgba(18, 18, 18, 0.6), rgba(18, 18, 18, 0.7)), url('https://images.unsplash.com/photo-1538428494232-9c0d8a3ab390?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat; color: white; text-align: center; padding: 120px 20px 60px; }
+        .hero-content { max-width: 850px; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(212, 175, 55, 0.25); border: 1px solid var(--gold); color: var(--gold-light); padding: 8px 20px; border-radius: 50px; font-size: 0.95rem; margin-bottom: 24px; }
+        .hero h1 { font-size: 3rem; font-weight: 700; margin-bottom: 20px; }
+        .hero p { font-size: 1.2rem; color: #E0E0E0; margin-bottom: 35px; }
+
+        /* Buttons */
+        .btn-primary { background: linear-gradient(135deg, var(--gold), #B89528); color: var(--dark); padding: 14px 32px; border-radius: 30px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
+        
+        /* Section */
+        .section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-title { font-size: 2.3rem; color: var(--dark); font-weight: 700; }
+
+        /* City Tabs */
+        .city-tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
+        .tab-btn { padding: 10px 24px; border: none; background: white; border-radius: 30px; font-size: 1rem; font-weight: 500; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: var(--transition); }
+        .tab-btn.active, .tab-btn:hover { background: var(--primary); color: white; }
+
+        /* Spots Grid */
+        .spots-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 30px; }
+        .spot-card { background: var(--card-bg); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); cursor: pointer; }
+        .spot-card:hover { transform: translateY(-8px); }
+        .spot-img-wrapper { position: relative; height: 220px; overflow: hidden; }
+        .spot-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .spot-card:hover .spot-img { transform: scale(1.08); }
+        .spot-city-badge { position: absolute; top: 15px; left: 15px; background: rgba(0, 0, 0, 0.7); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; }
+        .spot-body { padding: 22px; }
+        .spot-title { font-size: 1.25rem; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+        .spot-desc { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5; }
+        .spot-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid #F0F0F0; }
+        .spot-tag { color: var(--primary); font-size: 0.85rem; font-weight: 600; background: rgba(200, 16, 46, 0.08); padding: 4px 10px; border-radius: 6px; }
+
+        /* Modal */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 20px; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-container { background: white; width: 100%; max-width: 780px; max-height: 90vh; border-radius: 20px; overflow-y: auto; position: relative; }
+        .modal-close { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; background: rgba(0,0,0,0.6); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; z-index: 10; }
+        .modal-hero-img { width: 100%; height: 320px; object-fit: cover; }
+        .modal-content { padding: 30px; }
+        .modal-title { font-size: 1.8rem; color: var(--dark); margin-bottom: 10px; }
+        .modal-text { font-size: 1rem; color: #444; line-height: 1.8; margin-bottom: 20px; }
+        .modal-highlights { background: var(--light-bg); padding: 20px; border-radius: var(--radius-md); border-left: 4px solid var(--gold); }
+
+        footer { background: var(--dark); color: #888; padding: 30px 20px; text-align: center; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-dragon"></i></div>
+                <div class="logo-text">Siam-Jiangnan <span>Exclusive</span></div>
+            </a>
+            <a href="#contact" class="btn-contact-nav"><i class="fa-brands fa-facebook-messenger"></i> ติดต่อสอบถาม</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-badge"><i class="fa-solid fa-crown"></i> ทัวร์จีนส่วนตัวพรีเมียม VIP (6-8 ท่าน)</div>
+            <h1>สัมผัสเสน่ห์เซี่ยงไฮ้ & 江南 (Jiangnan)<br>ด้วยทริปสุดเอ็กซ์คลูซีฟเฉพาะครอบครัวคุณ</h1>
+            <p>ดูแลโดยคู่รักไทย-จีน มืออาชีพ • ไกด์ไทยแท้สื่อสารคล่องแคล่ว • รถตู้ VIP จัดการครบวงจร ไร้กังวลเรื่องภาษา</p>
+            <a href="#destinations" class="btn-primary"><i class="fa-solid fa-compass"></i> สำรวจสถานที่ท่องเที่ยว</a>
+        </div>
+    </header>
+
+    <section class="section" id="destinations">
+        <div class="section-header">
+            <h2 class="section-title">สถานที่ท่องเที่ยวยอดฮิต 4 เมืองหลัก</h2>
+        </div>
+
+        <div class="city-tabs">
+            <button class="tab-btn active" onclick="filterCity('all')">ทั้งหมด (All)</button>
+            <button class="tab-btn" onclick="filterCity('shanghai')">เซี่ยงไฮ้ (Shanghai)</button>
+            <button class="tab-btn" onclick="filterCity('suzhou')">ซูโจว (Suzhou)</button>
+            <button class="tab-btn" onclick="filterCity('wuxi')">อู๋ซี (Wuxi)</button>
+            <button class="tab-btn" onclick="filterCity('nanjing')">นานจิง (Nanjing)</button>
+        </div>
+
+        <div class="spots-grid" id="spotsGrid"></div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Siam-Jiangnan Exclusive Tour. All Rights Reserved.</p>
+    </footer>
+
+    <div class="modal-overlay" id="spotModal">
+        <div class="modal-container">
+            <div class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></div>
+            <img id="modalImg" class="modal-hero-img" src="" alt="Spot Image">
+            <div class="modal-content">
+                <h3 id="modalTitle" class="modal-title"></h3>
+                <p id="modalDesc" class="modal-text"></p>
+                <div class="modal-highlights">
+                    <h4 style="margin-bottom:10px;"><i class="fa-solid fa-gem" style="color:var(--gold)"></i> ไฮไลท์ที่ไม่ควรพลาด</h4>
+                    <ul id="modalHighlightsList" style="padding-left:20px;"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 精准匹配的真实图片数据
+        const attractions = [
+            {
+                id: 'sh1',
+                city: 'shanghai',
+                cityName: 'เซี่ยงไฮ้ (Shanghai)',
+                title: 'เดอะบันด์ (The Bund / 外滩)',
+                img: 'https://images.unsplash.com/photo-1538428494232-9c0d8a3ab390?auto=format&fit=crop&w=800&q=80',
+                tag: 'แลนด์มาร์กอันดับ 1',
+                shortDesc: 'สัญลักษณ์แห่งมหานครเซี่ยงไฮ้ ชมความงดงามของสถาปัตยกรรมยุโรปริมแม่น้ำหวงผู่ ปะทะวิวตึกระฟ้าสุดอลังการ',
+                fullDesc: 'เดอะบันด์ (The Bund) เป็นย่านทางเดินริมแม่น้ำหวงผู่ที่มีชื่อเสียงที่สุดในโลก อาคารสไตล์ยุโรปคลาสสิกเรียงรายริมฝั่ง River Walk ฝั่งตรงข้ามคือเส้นขอบฟ้าตึกระฟ้าของผู่ตง เช่น หอไข่มุก และ Shanghai Tower',
+                highlights: [
+                    'ถ่ายรูปวิวมุมมหาชนคู่กับหอไข่มุก (Oriental Pearl Tower)',
+                    'เดินชมสถาปัตยกรรมตะวันตกสไตล์กอธิคและเรอเนซองส์',
+                    'ล่องเรือสำราญชมไฟแม่น้ำหวงผู่ยามค่ำคืน'
+                ]
+            },
+            {
+                id: 'sh2',
+                city: 'shanghai',
+                cityName: 'เซี่ยงไฮ้ (Shanghai)',
+                title: 'เซี่ยงไฮ้ ดิสนีย์แลนด์ (Shanghai Disneyland)',
+                img: 'https://images.unsplash.com/photo-1505993597083-3bd19fb75e57?auto=format&fit=crop&w=800&q=80',
+                tag: 'สนุกสนานระดับโลก',
+                shortDesc: 'สวนสนุกดิสนีย์แลนด์ที่ใหญ่ที่สุดในเอเชีย พร้อมปราสาทดิสนีย์ที่สูงที่สุดและเครื่องเล่น TRON สุดไฮเทค',
+                fullDesc: 'อาณาจักรแห่งจินตนาการสำหรับทุกคนในครอบครัว มีเครื่องเล่นเอกสิทธิ์เฉพาะเซี่ยงไฮ้ เช่น TRON Lightcycle Power Run และ Zootopia โซนใหม่ล่าสุดที่แรกของโลก',
+                highlights: [
+                    'ผจญภัยในโซน Zootopia แห่งแรกของโลก',
+                    'สัมผัสความเร็วกับรถไฟเหาะ TRON Lightcycle/Run',
+                    'ชมการแสดงพลุและไฟสุดตระการตาหน้าปราสาท Enchanted Storybook Castle'
+                ]
+            },
+            {
+                id: 'sh3',
+                city: 'shanghai',
+                cityName: 'เซี่ยงไฮ้ (Shanghai)',
+                title: 'สวนอวี้หยวน (Yu Garden / 豫园)',
+                img: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80',
+                tag: 'วัฒนธรรม & ช้อปปิ้ง',
+                shortDesc: 'สัมผัสสวนโบราณสมัยราชวงศ์หมิง ผสมผสานกับตลาดโบราณและเสี่ยวหลงเปาเจ้าดัง',
+                fullDesc: 'สวนอวี้หยวนคือมรดกทางวัฒนธรรมอายุกว่า 400 ปี ล้อมรอบด้วยตลาดโบราณขายของที่ระลึก ร้านชาจีน และเสี่ยวหลงเปาสูตรต้นตำรับ',
+                highlights: [
+                    'ชิมเสี่ยวหลงเปาสูตรต้นตำรับแท้ๆ',
+                    'จิบชาในศาลากลางน้ำโบราณ',
+                    'ถ่ายรูปสถาปัตยกรรมจีนโบราณที่สมบูรณ์แบบ'
+                ]
+            },
+            {
+                id: 'sz1',
+                city: 'suzhou',
+                cityName: 'ซูโจว (Suzhou)',
+                title: 'สวนจัวเจิ้งหยวน (Humble Administrator Garden)',
+                img: 'https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?auto=format&fit=crop&w=800&q=80',
+                tag: 'มรดกโลก UNESCO',
+                shortDesc: '1 ใน 4 สวนโบราณที่ยิ่งใหญ่ที่สุดในจีน สถาปัตยกรรมแบบเจียงหนาน สะพานโค้ง สระบัว',
+                fullDesc: 'สวนจัวเจิ้งหยวนเปรียบเสมือนภาพวาดพู่กันจีนที่มีชีวิต ได้รับการยกย่องเป็นมรดกโลก UNESCO โดดเด่นด้วยการจัดวางพื้นที่ สะพานไม้ ศาลากลางน้ำ',
+                highlights: [
+                    'ชมปรัชญาการออกแบบสวนจีนโบราณ',
+                    'ถ่ายรูปชุดฮั่นฝู (ชุดโบราณจีน) ในบรรยากาศสุดคลาสสิก',
+                    'ผ่อนคลายริมสระบัวและสวนบอนไซโบราณ'
+                ]
+            },
+            {
+                id: 'sz2',
+                city: 'suzhou',
+                cityName: 'ซูโจว (Suzhou)',
+                title: 'ถนนคนเดินซานถาง (Shantang Street)',
+                img: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=800&q=80',
+                tag: 'เวเนิสแห่งตะวันออก',
+                shortDesc: 'เมืองโบราณริมคลองอายุกว่า 1,100 ปี นั่งเรือไม้ชมวิถีชีวิตริมน้ำและโคมไฟสีแดงยามค่ำคืน',
+                fullDesc: 'ถนนซานถางเป็นเส้นทางสายวัฒนธรรมริมคลองโบราณ ยามค่ำคืนจะเปิดโคมไฟสีแดงสะท้อนผิวน้ำ สวยงามโรแมนติกอย่างยิ่ง',
+                highlights: [
+                    'นั่งเรือแจวโบราณล่องคลองซานถาง',
+                    'ชมไฟโคมแดงสะท้อนน้ำยามค่ำคืน',
+                    'ชิมขนมหวานโบราณและชาซูโจว'
+                ]
+            },
+            {
+                id: 'wx1',
+                city: 'wuxi',
+                cityName: 'อู๋ซี (Wuxi)',
+                title: 'พระใหญ่หลิงซาน (Lingshan Grand Buddha)',
+                img: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80',
+                tag: 'อลังการศักดิ์สิทธิ์',
+                shortDesc: 'องค์พระสัมมาสัมพุทธเจ้าสำริดสูง 88 เมตร พร้อมชมวังพุทธศิลป์หลิงซานแฟนซีที่ตระการตา',
+                fullDesc: 'ศูนย์กลางพุทธศาสนาที่ยิ่งใหญ่ โดดเด่นด้วยองค์พระใหญ่หลิงซาน และวัง梵宫 (Vat Palace) ที่ตกแต่งอย่างอลังการด้วยไม้มงคล',
+                highlights: [
+                    'นมัสการองค์พระสำริดสูง 88 เมตรเพื่อความเป็นสิริมงคล',
+                    'ตื่นตาตื่นใจกับวังพุทธศิลป์ (Vat Palace) สุดอลังการ',
+                    'ชมการแสดงน้ำพุดนตรีกำเนิดพระพุทธเจ้า'
+                ]
+            },
+            {
+                id: 'nj1',
+                city: 'nanjing',
+                cityName: 'นานจิง (Nanjing)',
+                title: 'วัดขงจื๊อ & แม่น้ำฉินหวย (Confucius Temple)',
+                img: 'https://images.unsplash.com/photo-1512553353614-82a7370096dc?auto=format&fit=crop&w=800&q=80',
+                tag: 'เมืองหลวงโบราณ',
+                shortDesc: 'ศูนย์กลางประวัติศาสตร์วัฒนธรรมยามค่ำคืนที่สวยที่สุด ล่องเรือแม่น้ำฉินหวย ลิ้มรสอาหารนานจิง',
+                fullDesc: 'แม่น้ำฉินหวยเป็นแม่น้ำสายมารดาของนานจิง รายล้อมด้วยสถาปัตยกรรมสมัยราชวงศ์หมิงและชิง ยามค่ำคืนจะสว่างไสวด้วยไฟประดับ',
+                highlights: [
+                    'ล่องเรือมังกรชมแม่น้ำฉินหวยยามค่ำคืน',
+                    'สักการะวัดขงจื๊ออันเก่าแก่',
+                    'ชิมซุปเลือดเป็ดและเสี่ยวหลงเปานานจิง'
+                ]
+            }
+        ];
+
+        function renderSpots(data) {
+            const grid = document.getElementById('spotsGrid');
+            grid.innerHTML = '';
+            data.forEach(spot => {
+                const card = document.createElement('div');
+                card.className = 'spot-card';
+                card.onclick = () => openModal(spot.id);
+                card.innerHTML = `
+                    <div class="spot-img-wrapper">
+                        <img class="spot-img" src="${spot.img}" alt="${spot.title}">
+                        <div class="spot-city-badge">${spot.cityName}</div>
+                    </div>
+                    <div class="spot-body">
+                        <div class="spot-title">${spot.title}</div>
+                        <p class="spot-desc">${spot.shortDesc}</p>
+                        <div class="spot-footer">
+                            <span class="spot-tag">${spot.tag}</span>
+                            <span style="color:var(--primary); font-weight:600; font-size:0.9rem;">ดูรายละเอียด →</span>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCity(city) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            renderSpots(city === 'all' ? attractions : attractions.filter(i => i.city === city));
+        }
+
+        function openModal(id) {
+            const item = attractions.find(a => a.id === id);
+            if(!item) return;
+            document.getElementById('modalImg').src = item.img;
+            document.getElementById('modalTitle').innerText = item.title;
+            document.getElementById('modalDesc').innerText = item.fullDesc;
+            const list = document.getElementById('modalHighlightsList');
+            list.innerHTML = '';
+            item.highlights.forEach(h => {
+                const li = document.createElement('li');
+                li.innerText = h;
+                list.appendChild(li);
+            });
+            document.getElementById('spotModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('spotModal').classList.remove('active');
+        }
+
+        renderSpots(attractions);
+    </script>
+</body>
+</html>
